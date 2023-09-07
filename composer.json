@@ -1,0 +1,12 @@
+{
+    "name": "hexlet/code",
+    "description": "php-project-48",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bosun18"
+        }
+    ],
+    "require": {}
+}
