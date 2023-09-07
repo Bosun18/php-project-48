@@ -10,12 +10,14 @@ function run()
     Generate diff
 
     Usage:
-     gendiff (-h | --help)
+     gendiff (-h|--help)
      gendiff (--version)
+     gendiff [--format <fmt>] <firstFile> <secondFile>
 
     Options:
-      -h --help     Show this screen
-      --version     Show version
+      -h --help                     Show this screen
+      --version                     Show version
+      --format <fmt>                Report format [default: stylish]
     DOC;
     //$args = Docopt::handle($doc);
     //echo $args . PHP_EOL;
