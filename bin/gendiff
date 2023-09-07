@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
 
+use function Differ\genDiff;
+
 // Путь который будет использован при глобальной установке пакета
 $autoloadPath1 = __DIR__ . '/../../../autoload.php';
 // Путь для локальной работы с проектом
@@ -25,4 +27,11 @@ $doc = <<<DOC
       --version                     Show version
       --format <fmt>                Report format [default: stylish]
     DOC;
-$args = Docopt::handle($doc, array('version'=>'GenDiff 0.1.0'));
+$args = Docopt::handle($doc, array('version'=>'gendiff 0.1.0'));
+
+$firstFilePath = __DIR__ . '/../src/file1.json';
+$secondFilePath = __DIR__ . '/../src/file2.json';
+
+$diff = genDiff($firstFilePath, $secondFilePath);
+
+print_r($diff);
