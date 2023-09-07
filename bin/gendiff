@@ -1,5 +1,7 @@
 #!/usr/bin/env php
-<php
+<?php
+
+use function Index\run;
 
 // Путь который будет использован при глобальной установке пакета
 $autoloadPath1 = __DIR__ . '/../../../autoload.php';
@@ -11,3 +13,5 @@ if (file_exists($autoloadPath1)) {
 } else {
     require_once $autoloadPath2;
 }
+
+run();
