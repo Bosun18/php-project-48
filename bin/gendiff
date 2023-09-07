@@ -1,8 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-use function Index\run;
-
 // Путь который будет использован при глобальной установке пакета
 $autoloadPath1 = __DIR__ . '/../../../autoload.php';
 // Путь для локальной работы с проектом
@@ -14,4 +12,17 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-run();
+$doc = <<<DOC
+    Generate diff
+
+    Usage:
+     gendiff (-h|--help)
+     gendiff (--version)
+     gendiff [--format <fmt>] <firstFile> <secondFile>
+
+    Options:
+      -h --help                     Show this screen
+      --version                     Show version
+      --format <fmt>                Report format [default: stylish]
+    DOC;
+$args = Docopt::handle($doc, array('version'=>'GenDiff 1.0'));
