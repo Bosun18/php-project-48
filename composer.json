@@ -8,11 +8,6 @@
             "name": "Bosun18"
         }
     ],
-    "autoload": {
-        "files": [
-            "src/index.php"
-        ]
-    },
     "bin": [
         "bin/gendiff"
     ],
