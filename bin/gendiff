@@ -25,4 +25,4 @@ $doc = <<<DOC
       --version                     Show version
       --format <fmt>                Report format [default: stylish]
     DOC;
-$args = Docopt::handle($doc, array('version'=>'GenDiff 1.0'));
+$args = Docopt::handle($doc, array('version'=>'GenDiff 0.1.0'));
