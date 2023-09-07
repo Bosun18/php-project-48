@@ -8,5 +8,8 @@
             "name": "Bosun18"
         }
     ],
+    "bin": [
+        "bin/gendiff"
+    ],
     "require": {}
 }
