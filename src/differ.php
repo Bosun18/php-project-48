@@ -2,7 +2,7 @@
 
 namespace Differ;
 
-function getDataArray(string $data): array
+function getData(string $data): array
 {
     $dataDecode = json_decode($data, true);
 
@@ -25,8 +25,8 @@ function genDiff(string $firstFilePath, string $secondFilePath): string
     $data1 = file_get_contents($firstFilePath);
     $data2 = file_get_contents($secondFilePath);
 
-    $dataArray1 = getDataArray($data1);
-    $dataArray2 = getDataArray($data2);
+    $dataArray1 = getData($data1);
+    $dataArray2 = getData($data2);
 
     $keys = array_unique(array_merge(array_keys($dataArray1), array_keys($dataArray2)));
 
