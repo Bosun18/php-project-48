@@ -6,7 +6,7 @@ function getData(string $data): array
 {
     $dataDecode = json_decode($data, true);
 
-    $dataArray = array_map(function ($value) {
+    return array_map(function ($value) {
         if ($value === false) {
             return 'false';
         } elseif ($value === true) {
@@ -16,8 +16,6 @@ function getData(string $data): array
         }
         return $value;
     }, $dataDecode);
-
-    return $dataArray;
 }
 
 function genDiff(string $firstFilePath, string $secondFilePath): string
