@@ -3,7 +3,6 @@
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-
 use function Differ\genDiff;
 
 class DiffTest extends TestCase
@@ -18,3 +17,4 @@ class DiffTest extends TestCase
         echo "\n\033[42mFlat Tests passed!]\033[0m]\n";
     }
 }
+

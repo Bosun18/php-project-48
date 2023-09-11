@@ -9,9 +9,6 @@
         }
     ],
     "autoload": {
-        "psr-4": {
-            "Hexlet\\Code\\": "src/"
-        },
         "files": [
             "src/differ.php"
         ]
