@@ -43,5 +43,5 @@ function genDiff(string $firstFilePath, string $secondFilePath): string
         return "  - $key: $dataArray1[$key]\n  + $key: $dataArray2[$key]";
     }, $keys);
 
-    return "{\n" . implode("\n", $diffsFile) . "\n}" . PHP_EOL;
+    return "{\n" . implode("\n", $diffsFile) . "\n}";
 }
