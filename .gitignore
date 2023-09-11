@@ -1,7 +1,4 @@
+.idea
 /vendor/
-/idea/
+.phpunit.result.cache
 /build/
-logs
-*.swo
-*.swp
-*.cache
