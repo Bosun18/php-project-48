@@ -38,8 +38,10 @@ $secondFilePath = __DIR__ . "/../tests/fixtures/file2.json";
 
 //print_r(genDiff($file1, $file2, $format));
 
-if (!$firstFilePath or !$secondFilePath) {
-    echo "\033[41mPath error\033[0m" . PHP_EOL;
-} else {
-    echo genDiff($firstFilePath, $secondFilePath);
-}
+//if (!$firstFilePath or !$secondFilePath) {
+//    echo "\033[41mPath error\033[0m" . PHP_EOL;
+//} else {
+//    echo genDiff($firstFilePath, $secondFilePath);
+//}
+
+echo genDiff($firstFilePath, $secondFilePath);
