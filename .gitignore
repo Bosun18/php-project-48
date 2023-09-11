@@ -1,4 +1,6 @@
-/.idea/
+/\.idea/
 /vendor/
-.phpunit.result.cache
+/\.phpunit.result.cache/
 /build/
+.phpunit.result.cache 
+phpunit.xml.bak
