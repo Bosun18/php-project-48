@@ -15,6 +15,6 @@ class DiffTest extends TestCase
         $file2 = __DIR__ . "/fixtures/file2.json";
         $this->assertEquals($resultJson, genDiff($file1, $file2));
 
-        echo "\n\033[42mFlat Tests passed!\033[0m\n";
+        echo "\n\033[42mFlat Tests passed!]\033[0m]\n";
     }
 }
