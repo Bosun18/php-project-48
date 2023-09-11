@@ -32,14 +32,14 @@ $args = Docopt::handle($doc, array('version'=>'genDiff 0.1.0'));
 $firstFilePath = __DIR__ . "/../tests/fixtures/file1.json";
 $secondFilePath = __DIR__ . "/../tests/fixtures/file2.json";
 
-$file1 = $args['<firstFilePath>'];
-$file2 = $args['<secondFilePath >'];
-$format = $args['--format'];
+//$file1 = $args['<firstFilePath>'];
+//$file2 = $args['<secondFilePath >'];
+//$format = $args['--format'];
 
-print_r(genDiff($file1, $file2, $format));
+//print_r(genDiff($file1, $file2, $format));
 
-//if (!$firstFilePath or !$secondFilePath) {
-//    echo "\033[41mPath error\033[0m" . PHP_EOL;
-//} else {
-//    echo genDiff($firstFilePath, $secondFilePath);
-//}
+if (!$firstFilePath or !$secondFilePath) {
+    echo "\033[41mPath error\033[0m" . PHP_EOL;
+} else {
+    echo genDiff($firstFilePath, $secondFilePath);
+}
