@@ -10,6 +10,9 @@
          stopOnFailure="true"
          bootstrap="vendor/autoload.php"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+    <testsuite name="default">
+        <directory suffix="Test.php">tests</directory>
+    </testsuite>
     <coverage includeUncoveredFiles="true">
         <include>
             <directory suffix=".php">./src</directory>
