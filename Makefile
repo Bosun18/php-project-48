@@ -5,8 +5,8 @@ validate:
 gendiff:
 	./bin/gendiff
 lint:
-	composer exec --verbose phpcs -- --standard=PSR12 src bin
-	composer exec --verbose phpstan
+	composer exec --verbose phpcs -- --standard=PSR12 bin src files
+	composer exec --verbose phpstan analyze bin src files
 test:
 	composer exec --verbose phpunit tests
 test-coverage:
