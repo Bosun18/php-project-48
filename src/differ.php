@@ -18,7 +18,7 @@ function getData(string $data): array
     }, $dataDecode);
 }
 
-function genDiff(string $firstFilePath, string $secondFilePath, string $format = 'stylish'): string
+function genDiff(string $firstFilePath, string $secondFilePath): string
 {
     $data1 = file_get_contents($firstFilePath);
     $data2 = file_get_contents($secondFilePath);
