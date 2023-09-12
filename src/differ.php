@@ -7,7 +7,7 @@ use function Differ\Parsers\parse;
 /**
  * @throws \Exception
  */
-function getData(array $data): array
+function getData($data): array
 {
 //    $dataDecode = json_decode($data, true);
 
