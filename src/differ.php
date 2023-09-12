@@ -2,6 +2,8 @@
 
 namespace Differ;
 
+use function Differ\parse;
+
 function getData(string $data): array
 {
     $dataDecode = json_decode($data, true);
@@ -20,8 +22,11 @@ function getData(string $data): array
 
 function genDiff(string $firstFilePath, string $secondFilePath): string
 {
-    $data1 = file_get_contents($firstFilePath);
-    $data2 = file_get_contents($secondFilePath);
+//    $data1 = file_get_contents($firstFilePath);
+//    $data2 = file_get_contents($secondFilePath);
+
+    $data1 = parse($firstFilePath);
+    $data2 = parse($secondFilePath);
 
     $dataArray1 = getData($data1);
     $dataArray2 = getData($data2);
