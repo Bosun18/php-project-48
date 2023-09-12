@@ -2,7 +2,7 @@
 
 namespace Differ\Differ;
 
-use function Differ\Parsers\parse;
+//use function Differ\Parsers\parse;
 
 function getData(string $data): array
 {
@@ -22,11 +22,11 @@ function getData(string $data): array
 
 function genDiff(string $firstFilePath, string $secondFilePath): string
 {
-//    $data1 = file_get_contents($firstFilePath);
-//    $data2 = file_get_contents($secondFilePath);
+    $data1 = file_get_contents($firstFilePath);
+    $data2 = file_get_contents($secondFilePath);
 
-    $data1 = parse($firstFilePath);
-    $data2 = parse($secondFilePath);
+//    $data1 = parse($firstFilePath);
+//    $data2 = parse($secondFilePath);
 
     $dataArray1 = getData($data1);
     $dataArray2 = getData($data2);
