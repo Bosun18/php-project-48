@@ -20,7 +20,7 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * @throws \Exception
  */
-function getFileContent(string $pathToFile)
+function getFileContent(string $pathToFile): string
 {
     $contentOfFile = @file_get_contents($pathToFile);
     if ($contentOfFile !== false) {
@@ -36,17 +36,9 @@ function parse(string $pathToFile)
 {
     $contentOfFile = getFileContent($pathToFile);
     $extensionOfFile = pathinfo($pathToFile, PATHINFO_EXTENSION);
-    switch ($extensionOfFile) {
-        case 'json':
-            $parsedContentOfFile = json_decode($contentOfFile, true);
-            break;
-        case 'yml':
-        case 'yaml':
-            $parsedContentOfFile = Yaml::parse($contentOfFile);
-            break;
-        default:
-            throw new \Exception("Unsupported format of incoming file!", 1);
-    }
-
-    return $parsedContentOfFile;
+    return match ($extensionOfFile) {
+        'json' => json_decode($contentOfFile, true),
+        'yml', 'yaml' => Yaml::parse($contentOfFile),
+        default => throw new \Exception("Unsupported format of incoming file!", 1),
+    };
 }
