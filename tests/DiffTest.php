@@ -8,6 +8,9 @@ use function Differ\Differ\genDiff;
 
 class DiffTest extends TestCase
 {
+    /**
+     * @throws \Exception
+     */
     public function testGenDiff()
     {
 //        $resultJson = file_get_contents(__DIR__ . "/fixtures/resultJson.txt");

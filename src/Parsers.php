@@ -4,27 +4,14 @@ namespace Differ\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
 
-//function getParse(string $dataFile, string $extension): mixed
-//{
-//    switch ($extension) {
-//        case 'json':
-//            return json_decode($dataFile, true);
-//        case 'yml':
-//        case 'yaml':
-//            return Yaml::parse($dataFile);
-//        default:
-//            throw new \Exception('Unknown extension ' . $extension);
-//    }
-//}
-
 /**
  * @throws \Exception
  */
-function getFileContent(string $pathToFile): string
+function getData(string $path): string
 {
-    $contentOfFile = @file_get_contents($pathToFile);
-    if ($contentOfFile !== false) {
-        return $contentOfFile;
+    $data = file_get_contents($path);
+    if ($data !== false) {
+        return $data;
     }
     throw new \Exception("File not found", 1);
 }
@@ -32,13 +19,13 @@ function getFileContent(string $pathToFile): string
 /**
  * @throws \Exception
  */
-function parse(string $pathToFile)
+function parse(string $path)
 {
-    $contentOfFile = getFileContent($pathToFile);
-    $extensionOfFile = pathinfo($pathToFile, PATHINFO_EXTENSION);
-    return match ($extensionOfFile) {
-        'json' => json_decode($contentOfFile, true),
-        'yml', 'yaml' => Yaml::parse($contentOfFile),
-        default => throw new \Exception("Unsupported format of incoming file!", 1),
+    $data = getData($path);
+    $extension = pathinfo($path, PATHINFO_EXTENSION);
+    return match ($extension) {
+        'json' => json_decode($data, true),
+        'yml', 'yaml' => Yaml::parse($data),
+        default => throw new \Exception("Неизвестный формат", 1),
     };
 }
