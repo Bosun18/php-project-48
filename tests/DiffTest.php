@@ -21,7 +21,7 @@ class DiffTest extends TestCase
         $this->assertEquals($expected, genDiff($file1, $file2));
     }
 
-    private function getPathToFixture($fixtureName)
+    private function getPathToFixture($fixtureName): string
     {
         return __DIR__ . "/fixtures/" . $fixtureName;
     }
