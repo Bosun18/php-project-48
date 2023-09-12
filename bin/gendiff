@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use function Differ\genDiff;
+use function Differ\Differ\genDiff;
 
 // Путь который будет использован при глобальной установке пакета
 $autoloadPath1 = __DIR__ . '/../../../autoload.php';

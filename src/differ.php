@@ -1,8 +1,8 @@
 <?php
 
-namespace Differ;
+namespace Differ\Differ;
 
-use function Differ\parse;
+use function Differ\Parsers\parse;
 
 function getData(string $data): array
 {

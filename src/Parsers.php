@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ;
+namespace Differ\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
 
@@ -17,6 +17,9 @@ use Symfony\Component\Yaml\Yaml;
 //    }
 //}
 
+/**
+ * @throws \Exception
+ */
 function getFileContent(string $pathToFile)
 {
     $contentOfFile = @file_get_contents($pathToFile);
