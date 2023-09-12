@@ -26,4 +26,3 @@ class DiffTest extends TestCase
         return __DIR__ . "/fixtures/" . $fixtureName;
     }
 }
-
