@@ -7,11 +7,11 @@ use function Differ\Parsers\parse;
 /**
  * @throws \Exception
  */
-function getData(string $data): array
+function getData(array $data): array
 {
-    $dataDecode = json_decode($data, true);
+//    $dataDecode = json_decode($data, true);
 
-    return array_map(function ($value) {
+    return array_map(function ($value) use ($data) {
         if ($value === false) {
             return 'false';
         } elseif ($value === true) {
@@ -20,7 +20,7 @@ function getData(string $data): array
             return 'null';
         }
         return $value;
-    }, $dataDecode);
+    }, $data);
 }
 
 /**
