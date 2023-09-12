@@ -7,10 +7,9 @@ use function Differ\Parsers\parse;
 /**
  * @throws \Exception
  */
-function getData(string $pathToFile): array
+function getData(string $data): array
 {
-//    $dataDecode = json_decode($data, true);
-    $dataDecode = parse($pathToFile);
+    $dataDecode = json_decode($data, true);
 
     return array_map(function ($value) {
         if ($value === false) {
@@ -29,8 +28,10 @@ function getData(string $pathToFile): array
  */
 function genDiff(string $firstFilePath, string $secondFilePath): string
 {
-    $data1 = file_get_contents($firstFilePath);
-    $data2 = file_get_contents($secondFilePath);
+//    $data1 = file_get_contents($firstFilePath);
+//    $data2 = file_get_contents($secondFilePath);
+    $data1 = parse($firstFilePath);
+    $data2 = parse($secondFilePath);
 
     $dataArray1 = getData($data1);
     $dataArray2 = getData($data2);
