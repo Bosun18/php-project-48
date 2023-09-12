@@ -1,6 +1,11 @@
-/\.idea/
+.idea
 /vendor/
-/\.phpunit.result.cache/
-/build/
-.phpunit.result.cache 
+.phpunit.result.cache
+/build/ 
 phpunit.xml.bak
+logs
+*.swo
+*.swp
+*.cache
+build
+coverage
