@@ -2,14 +2,14 @@
 
 namespace Differ\Differ;
 
-//use function Differ\Parsers\parse;
+use function Differ\Parsers\parse;
 
 /**
  * @throws \Exception
  */
-function getData(string $data): array
+function getData($data): array
 {
-    $dataDecode = json_decode($data, true);
+    // $dataDecode = json_decode($data, true);
 
     return array_map(function ($value) use ($data) {
         if ($value === false) {
@@ -20,7 +20,7 @@ function getData(string $data): array
             return 'null';
         }
         return $value;
-    }, $dataDecode);
+    }, $data);
 }
 
 /**
@@ -28,10 +28,10 @@ function getData(string $data): array
  */
 function genDiff(string $firstFilePath, string $secondFilePath): string
 {
-    $data1 = file_get_contents($firstFilePath);
-    $data2 = file_get_contents($secondFilePath);
-//    $data1 = parse($firstFilePath);
-//    $data2 = parse($secondFilePath);
+    // $data1 = file_get_contents($firstFilePath);
+    // $data2 = file_get_contents($secondFilePath);
+    $data1 = parse($firstFilePath);
+    $data2 = parse($secondFilePath);
 
     $dataArray1 = getData($data1);
     $dataArray2 = getData($data2);

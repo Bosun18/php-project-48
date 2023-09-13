@@ -11,6 +11,7 @@
     "autoload": {
         "files": [
             "src/differ.php",
+            "src/Parsers.php",
             "tests/DiffTest.php"
         ]
     },

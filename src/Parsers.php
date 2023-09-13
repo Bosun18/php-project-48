@@ -19,7 +19,7 @@ function getData(string $path): string
 /**
  * @throws \Exception
  */
-function parse(string $path)
+function parse(string $path): array
 {
     $data = getData($path);
     $extension = pathinfo($path, PATHINFO_EXTENSION);
