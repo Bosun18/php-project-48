@@ -6,6 +6,8 @@
 [![project-check](https://github.com/Bosun18/php-project-48/actions/workflows/project-check.yml/badge.svg)](https://github.com/Bosun18/php-project-48/actions/workflows/project-check.yml)
 ### Asciinema gendif file1.json file2.json
 [![asciicast](https://asciinema.org/a/tfYg75aLPYN9iUsNhcoVyWNkQ.svg)](https://asciinema.org/a/tfYg75aLPYN9iUsNhcoVyWNkQ)
+### Asciinema gendif file3.yaml file4.yaml
+[![asciicast](https://asciinema.org/a/jm1qc4dSzM1WPRi83J3rQPMdp.svg)](https://asciinema.org/a/jm1qc4dSzM1WPRi83J3rQPMdp)
 ### About the program
 #### Вычислитель отличий – программа, определяющая разницу между двумя структурами данных.
 ### Requirements:
