@@ -10,9 +10,12 @@
     ],
     "autoload": {
         "files": [
-            "src/differ.php",
+          "src/Differ.php",
             "src/Parsers.php",
-            "tests/DiffTest.php"
+            "tests/DiffTest.php",
+            "src/Formatters.php",
+            "src/Formatters/Stylish.php",
+            "src/Formatters/Json.php"
         ]
     },
     "bin": [
