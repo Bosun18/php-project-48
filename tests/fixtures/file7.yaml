@@ -1,4 +1,3 @@
----
 common:
   setting1: Value 1
   setting2: 200
@@ -6,7 +5,7 @@ common:
   setting6:
     key: value
     doge:
-      wow: ""
+      wow: ''
 group1:
   baz: bas
   foo: bar
