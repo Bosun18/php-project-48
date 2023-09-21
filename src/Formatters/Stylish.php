@@ -1,13 +1,13 @@
 <?php
 
-namespace Differ\Stylish;
+namespace Differ\Formatters\Stylish;
 
 function toString(string $value): string
 {
     return trim(var_export($value, true), "'");
 }
 
-function getStringsTree(mixed $value, string $replacer = ' ', int $spaceCount = 4): string
+function getStrings(mixed $value, string $replacer = ' ', int $spaceCount = 4): string
 {
     if (!is_array($value)) {
         return toString($value);
@@ -34,13 +34,16 @@ function getStringsTree(mixed $value, string $replacer = ' ', int $spaceCount = 
                     return $indent . $key . ': ' . $iter($item, $depth + 1);
                 }
                 if ($item['type'] === 'added') {
-                    return $indentStr . '+ ' . $item['key'] . ': ' . $iter($item['value'], $depth + 1);
+                    return $indentStr . '+ ' . $item['key'] . ': ' . $iter($item['value2'], $depth + 1);
                 }
                 if ($item['type'] === 'deleted') {
-                    return $indentStr . '- ' . $item['key'] . ': ' . $iter($item['value'], $depth + 1);
+                    return $indentStr . '- ' . $item['key'] . ': ' . $iter($item['value1'], $depth + 1);
                 }
-
-                return $indent . $item['key'] . ': ' . $iter($item['value'], $depth + 1);
+                if ($item['type'] === 'updated') {
+                    return  $indentStr . '- ' . $item['key'] . ': ' . $iter($item['value1'], $depth + 1) . "\n"
+                        .  $indentStr . '+ ' . $item['key'] . ': ' . $iter($item['value2'], $depth + 1);
+                }
+                return $indent . $item['key'] . ': ' . $iter($item['value1'], $depth + 1);
             },
             $currentValue,
             array_keys($currentValue)

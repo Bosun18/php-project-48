@@ -4,6 +4,9 @@ namespace Differ\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * @throws \Exception
+ */
 function getRealPath(string $pathToFile): string
 {
     $fullPath = realpath($pathToFile);
@@ -13,37 +16,31 @@ function getRealPath(string $pathToFile): string
     return $fullPath;
 }
 
-function getFormattedArray(mixed $dataArray): mixed
+function getFormat(mixed $data): array
 {
     return array_map(function ($value) {
-        if ($value === false) {
-            return 'false';
-        } elseif ($value === true) {
-            return 'true';
-        } elseif (is_null($value)) {
-            return 'null';
-        } elseif (is_array($value)) {
-            return getFormattedArray($value); // Рекурсивный вызов для обработки вложенных массивов
-        }
-        return $value;
-    }, $dataArray);
+        return match ($value) {
+            false => 'false',
+            true => 'true',
+            null => 'null',
+            default => is_array($value) ? getFormat($value) : $value
+        };
+    }, $data);
 }
 
-function getParseCode(string $pathToFile): mixed
+/**
+ * @throws \Exception
+ */
+function parse(string $pathToFile): array
 {
     $fullPath = getRealPath($pathToFile);
     $data = file_get_contents($fullPath);
-    $extension = pathinfo($fullPath)['extension'];
-    $dataArray = [];
-
-    if ($extension === 'yaml' || $extension === 'yml') {
-        $dataArray = Yaml::parse($data);
-    }
-    if ($extension === 'json') {
-        $dataArray = json_decode($data, true);
-    }
-
-    $resultArray = getFormattedArray($dataArray);
-
-    return $resultArray;
+    $extension = pathinfo($fullPath, PATHINFO_EXTENSION);
+    $array = match ($extension) {
+        'yaml', 'yml' => Yaml::parse($data),
+        'json' => json_decode($data, true),
+        default => []
+    };
+    $result = getFormat($array);
+    return $result;
 }
