@@ -32,21 +32,21 @@ function getChange(mixed $diffArray, string $parentKey = ''): string
             case 'nested':
                 return getChange($value1, $newKey);
             case 'added':
-                $normalizeValue = normalize($value2);
-                return "Property '" . $newKey . "' was added with value: " . $normalizeValue;
+                $normalize = normalize($value2);
+                return "Property '" . $newKey . "' was added with value: " . $normalize;
             case 'deleted':
                 return "Property '" . $newKey . "' was removed";
             case 'updated':
-                $normalizeValue1 = normalize($value1);
-                $normalizeValue2 = normalize($value2);
-                return "Property '" . $newKey . "' was updated. From " . $normalizeValue1 . ' to ' . $normalizeValue2;
+                $normalize1 = normalize($value1);
+                $normalize2 = normalize($value2);
+                return "Property '" . $newKey . "' was updated. From " . $normalize1 . ' to ' . $normalize2;
             case 'immutable':
                 break;
             default:
                 throw new \Exception("Unknown node type: {$type}");
         }
     }, $diffArray);
-    $result = array_filter($result); // Удаляем пустые значения из массива
+    $result = array_filter($result);
 
     return implode("\n", $result);
 }
