@@ -10,7 +10,6 @@ use function Differ\Formatter\getFormatter;
  */
 function genDiff(string $pathToFile1, string $pathToFile2, string $format = 'stylish'): string
 {
-
     $dataArray1 = parse($pathToFile1);
     $dataArray2 = parse($pathToFile2);
 

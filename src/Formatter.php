@@ -17,7 +17,6 @@ function getTree(mixed $array1, mixed $array2): array
                 && is_array($array1[$key]) && is_array($array2[$key])
             ) {
                 $nestedComparison = getTree($array1[$key], $array2[$key]);
-
                 return [
                     'key' => $key,
                     'type' => 'nested',
@@ -56,23 +55,16 @@ function getTree(mixed $array1, mixed $array2): array
         },
         $keys
     );
-
     return $result;
 }
 
-
-/**
- * @throws \Exception
- */
-function getFormatter(mixed $dataArray1, mixed $dataArray2, string $format): string
+function getFormatter(mixed $data1, mixed $data2, string $format): string
 {
-    $result = '';
-    $diffArray = getTree($dataArray1, $dataArray2);
-    if ($format === 'stylish') {
-        $result = getStrings($diffArray, ' ', 4);
-    }
-    if ($format === 'plain') {
-        $result = getChange($diffArray);
-    }
+    $diff = getTree($data1, $data2);
+    $result = match ($format) {
+        'stylish' => getStrings($diff, ' ', 4),
+        'plain' => getChange($diff),
+        default => '',
+    };
     return $result;
 }

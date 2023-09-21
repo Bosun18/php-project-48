@@ -49,7 +49,6 @@ function getStrings(mixed $value, string $replacer = ' ', int $spaceCount = 4): 
             array_keys($currentValue)
         );
         $result = ['{', ...$strings, $bracketIndent . '}'];
-
         return implode("\n", $result);
     };
     return $iter($value, 1);
