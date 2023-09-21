@@ -1,6 +1,7 @@
 /vendor/
 /\.idea/
 /build/
+/\.phpunit.cache/
 *.cache
 *.bak
 *.swo
