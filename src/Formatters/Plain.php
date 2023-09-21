@@ -20,14 +20,11 @@ function normalize(mixed $value): string|int|float
 function getChange(mixed $diffArray, string $parentKey = ''): string
 {
     $result = array_map(function ($node) use ($parentKey) {
-
         $type = $node['type'];
         $key =  $node['key'];
         $value1 = $node['value1'];
         $value2 = $node['value2'];
-
         $newKey = $parentKey === '' ? $key : $parentKey . '.' . $key;
-
         switch ($type) {
             case 'nested':
                 return getChange($value1, $newKey);
@@ -47,6 +44,5 @@ function getChange(mixed $diffArray, string $parentKey = ''): string
         }
     }, $diffArray);
     $result = array_filter($result);
-
     return implode("\n", $result);
 }
