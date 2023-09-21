@@ -5,17 +5,13 @@ namespace Differ\Formatters\Plain;
 function normalize(mixed $value): string|int|float
 {
     if (!is_array($value)) {
-        if ($value === 'null' || $value === 'true' || $value === 'false') {
-            return $value;
-        }
-        if (is_numeric($value)) {
-            return $value;
-        }
-        return "'{$value}'";
+        return match ($value) {
+            'null', 'true', 'false' => $value,
+            default => is_numeric($value) ? $value : "'{$value}'",
+        };
     }
     return "[complex value]";
 }
-
 
 function getChange(mixed $diffArray, string $parentKey = ''): string
 {
