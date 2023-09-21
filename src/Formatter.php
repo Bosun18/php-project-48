@@ -16,41 +16,16 @@ function getTree(mixed $array1, mixed $array2): array
                 array_key_exists($key, $array1) && array_key_exists($key, $array2)
                 && is_array($array1[$key]) && is_array($array2[$key])
             ) {
-                $nestedComparison = getTree($array1[$key], $array2[$key]);
-                return [
-                    'key' => $key,
-                    'type' => 'nested',
-                    'value1' => $nestedComparison,
-                    'value2' => $nestedComparison,
-                ];
+                $nestedCompare = getTree($array1[$key], $array2[$key]);
+                return ['key' => $key, 'type' => 'nested', 'value1' => $nestedCompare, 'value2' => $nestedCompare,];
             } elseif (!array_key_exists($key, $array2)) {
-                return [
-                    'key' => $key,
-                    'type' => 'deleted',
-                    'value1' => $array1[$key],
-                    'value2' => null,
-                ];
+                return ['key' => $key, 'type' => 'deleted', 'value1' => $array1[$key], 'value2' => null,];
             } elseif (!array_key_exists($key, $array1)) {
-                return  [
-                    'key' => $key,
-                    'type' => 'added',
-                    'value1' => null,
-                    'value2' => $array2[$key],
-                ];
+                return  ['key' => $key, 'type' => 'added', 'value1' => null, 'value2' => $array2[$key],];
             } elseif ($array1[$key] !== $array2[$key]) {
-                return  [
-                    'key' => $key,
-                    'type' => 'updated',
-                    'value1' => $array1[$key],
-                    'value2' => $array2[$key],
-                ];
+                return  ['key' => $key, 'type' => 'updated', 'value1' => $array1[$key], 'value2' => $array2[$key],];
             } else {
-                return [
-                    'key' => $key,
-                    'type' => 'immutable',
-                    'value1' => $array1[$key],
-                    'value2' => $array2[$key],
-                ];
+                return ['key' => $key, 'type' => 'immutable', 'value1' => $array1[$key], 'value2' => $array2[$key],];
             }
         },
         $keys
