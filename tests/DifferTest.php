@@ -37,6 +37,7 @@ class DifferTest extends TestCase
 
         $pathToFile5 = 'tests/fixtures/file5.json';
         $pathToFile6 = 'tests/fixtures/file6.json';
+//        $result3 = file_get_contents('tests/fixtures/resultStylish.txt');
         $result3 = '{
     common: {
       + follow: false
