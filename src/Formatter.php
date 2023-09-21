@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ\Formatters;
+namespace Differ\Formatter;
 
 use function Differ\Formatters\Stylish\getStrings;
 use function Differ\Formatters\Plain\getChange;

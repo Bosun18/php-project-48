@@ -3,7 +3,7 @@
 namespace Differ\Differ;
 
 use function Differ\Parsers\parse;
-use function Differ\Formatters\getFormatter;
+use function Differ\Formatter\getFormatter;
 
 /**
  * @throws \Exception
