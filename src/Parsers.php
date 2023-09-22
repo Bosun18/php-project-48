@@ -39,7 +39,7 @@ function parse(string $pathToFile): array
     $array = match ($extension) {
         'yaml', 'yml' => Yaml::parse($data),
         'json' => json_decode($data, true),
-        default => []
+        default => throw new \Exception('Unknown extension ' . $extension)
     };
     $result = getFormat($array);
     return $result;

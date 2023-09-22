@@ -13,7 +13,7 @@ function normalize(mixed $value): string|int|float
     return "[complex value]";
 }
 
-function getChange(mixed $diffArray, string $parentKey = ''): string
+function getPlain(mixed $diffArray, string $parentKey = ''): string
 {
     $result = array_map(function ($node) use ($parentKey) {
         $type = $node['type'];
@@ -23,7 +23,7 @@ function getChange(mixed $diffArray, string $parentKey = ''): string
         $newKey = $parentKey === '' ? $key : $parentKey . '.' . $key;
         switch ($type) {
             case 'nested':
-                return getChange($value1, $newKey);
+                return getPlain($value1, $newKey);
             case 'added':
                 $normalize = normalize($value2);
                 return "Property '" . $newKey . "' was added with value: " . $normalize;
