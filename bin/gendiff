@@ -29,11 +29,11 @@ $doc = <<<DOC
     DOC;
 $args = Docopt::handle($doc, array('version'=>'genDiff 0.1.0'));
 
-$firstFilePath = $args['<firstFile>'];
-$secondFilePath = $args['<secondFile>'];
+$pathToFile1 = $args['<firstFile>'];
+$pathToFile2 = $args['<secondFile>'];
 $format = $args['--format'];
 
 try {
-    echo genDiff($firstFilePath, $secondFilePath, $format);
+    echo genDiff($pathToFile1, $pathToFile2, $format);
 } catch (Exception $e) {
 }

@@ -7,10 +7,10 @@ function toString(string $value): string
     return trim(var_export($value, true), "'");
 }
 
-function getStylish(mixed $value, string $replacer = ' ', int $spaceCount = 4): string
+function getStylish(mixed $diff, string $replacer = ' ', int $spaceCount = 4): string
 {
-    if (!is_array($value)) {
-        return toString($value);
+    if (!is_array($diff)) {
+        return toString($diff);
     }
 
     $iter = function ($currentValue, $depth) use (&$iter, $replacer, $spaceCount) {
@@ -23,9 +23,9 @@ function getStylish(mixed $value, string $replacer = ' ', int $spaceCount = 4): 
         $shiftToLeft = 2;
         $indent = str_repeat($replacer, $indentLength);
         $indentStr = str_repeat($replacer, $indentLength - $shiftToLeft);
-        $bracketIndent = str_repeat($replacer, $indentLength - $spaceCount);
+        $indentBrace = str_repeat($replacer, $indentLength - $spaceCount);
 
-        $strings = array_map(
+        $string = array_map(
             function ($item, $key) use ($indent, $indentStr, $iter, $depth) {
                 if (!is_array($item)) {
                     return $indent . $key . ': ' . $iter($item, $depth + 1);
@@ -48,8 +48,8 @@ function getStylish(mixed $value, string $replacer = ' ', int $spaceCount = 4): 
             $currentValue,
             array_keys($currentValue)
         );
-        $result = ['{', ...$strings, $bracketIndent . '}'];
+        $result = ['{', ...$string, $indentBrace . '}'];
         return implode("\n", $result);
     };
-    return $iter($value, 1);
+    return $iter($diff, 1);
 }

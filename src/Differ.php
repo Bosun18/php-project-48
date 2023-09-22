@@ -56,8 +56,59 @@ function getTree(mixed $array1, mixed $array2): array
         },
         $keys
     );
-
     return $result;
+}
+
+/**
+ * @throws \Exception
+ */
+function getRealPath(string $pathToFile): string
+{
+    $fullPath = realpath($pathToFile);
+    if ($fullPath === false) {
+        throw new \Exception("File does not exists");
+    }
+    return $fullPath;
+}
+
+function getResultValue(mixed $data): array
+{
+    return array_map(function ($value) {
+        return match ($value) {
+            false => 'false',
+            true => 'true',
+            null => 'null',
+            default => is_array($value) ? getResultValue($value) : $value
+        };
+    }, $data);
+}
+
+/**
+ * @throws \Exception
+ */
+function getParseData($pathToFile): array
+{
+    $extension = getExtension($pathToFile);
+    $data = getData($pathToFile);
+    return getResultValue(parse($data, $extension));
+}
+
+/**
+ * @throws \Exception
+ */
+function getExtension($pathToFile): array|string
+{
+    $fullPath = getRealPath($pathToFile);
+    return pathinfo($fullPath, PATHINFO_EXTENSION);
+}
+
+/**
+ * @throws \Exception
+ */
+function getData(string $pathToFile): string|bool
+{
+    $fullPath = getRealPath($pathToFile);
+    return file_get_contents($fullPath);
 }
 
 /**
@@ -65,9 +116,9 @@ function getTree(mixed $array1, mixed $array2): array
  */
 function genDiff(string $pathToFile1, string $pathToFile2, string $format = 'stylish'): string
 {
-    $dataArray1 = parse($pathToFile1);
-    $dataArray2 = parse($pathToFile2);
+    $data1 = getParseData($pathToFile1);
+    $data2 = getParseData($pathToFile2);
+    $diff = getTree($data1, $data2);
 
-    $result = getFormatter($dataArray1, $dataArray2, $format);
-    return $result . "\n";
+    return getFormatter($diff, $format) . "\n";
 }

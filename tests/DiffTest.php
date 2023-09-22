@@ -13,38 +13,38 @@ class DiffTest extends TestCase
      */
     public function testGenDiff()
     {
-        $file1 = $this->fixturePath('file5.json');
-        $file2 = $this->fixturePath('file6.json');
-        $result = file_get_contents($this->fixturePath('resultStylish.txt'));
+        $file1 = $this->getFixturePath('file5.json');
+        $file2 = $this->getFixturePath('file6.json');
+        $result = file_get_contents($this->getFixturePath('resultStylish.txt'));
         $this->assertEquals($result, genDiff($file1, $file2, 'stylish'));
 
-        $file1 = $this->fixturePath('file7.yaml');
-        $file2 = $this->fixturePath('file8.yaml');
-        $result = file_get_contents($this->fixturePath('resultStylish.txt'));
+        $file1 = $this->getFixturePath('file7.yaml');
+        $file2 = $this->getFixturePath('file8.yaml');
+        $result = file_get_contents($this->getFixturePath('resultStylish.txt'));
         $this->assertEquals($result, genDiff($file1, $file2, 'stylish'));
 
-        $file1 = $this->fixturePath('file5.json');
-        $file2 = $this->fixturePath('file6.json');
-        $result = file_get_contents($this->fixturePath('resultPlain.txt'));
+        $file1 = $this->getFixturePath('file5.json');
+        $file2 = $this->getFixturePath('file6.json');
+        $result = file_get_contents($this->getFixturePath('resultPlain.txt'));
         $this->assertEquals($result, genDiff($file1, $file2, 'plain'));
 
-        $file1 = $this->fixturePath('file7.yaml');
-        $file2 = $this->fixturePath('file8.yaml');
-        $result = file_get_contents($this->fixturePath('resultPlain.txt'));
+        $file1 = $this->getFixturePath('file7.yaml');
+        $file2 = $this->getFixturePath('file8.yaml');
+        $result = file_get_contents($this->getFixturePath('resultPlain.txt'));
         $this->assertEquals($result, genDiff($file1, $file2, 'plain'));
 
-        $file1 = $this->fixturePath('file5.json');
-        $file2 = $this->fixturePath('file6.json');
-        $result = file_get_contents($this->fixturePath('resultJson.txt'));
+        $file1 = $this->getFixturePath('file5.json');
+        $file2 = $this->getFixturePath('file6.json');
+        $result = file_get_contents($this->getFixturePath('resultJson.txt'));
         $this->assertEquals($result, genDiff($file1, $file2, 'json'));
 
-        $file1 = $this->fixturePath('file7.yaml');
-        $file2 = $this->fixturePath('file8.yaml');
-        $result = file_get_contents($this->fixturePath('resultJson.txt'));
+        $file1 = $this->getFixturePath('file7.yaml');
+        $file2 = $this->getFixturePath('file8.yaml');
+        $result = file_get_contents($this->getFixturePath('resultJson.txt'));
         $this->assertEquals($result, genDiff($file1, $file2, 'json'));
     }
 
-    private function fixturePath($fixtureName): string
+    private function getFixturePath($fixtureName): string
     {
         return __DIR__ . "/fixtures/" . $fixtureName;
     }

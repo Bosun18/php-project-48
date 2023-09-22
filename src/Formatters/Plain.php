@@ -13,14 +13,14 @@ function normalize(mixed $value): string|int|float
     return "[complex value]";
 }
 
-function getPlain(mixed $diffArray, string $parentKey = ''): string
+function getPlain(mixed $diff, string $keyName = ''): string
 {
-    $result = array_map(function ($node) use ($parentKey) {
+    $result = array_map(function ($node) use ($keyName) {
         $type = $node['type'];
         $key =  $node['key'];
         $value1 = $node['value1'];
         $value2 = $node['value2'];
-        $newKey = $parentKey === '' ? $key : $parentKey . '.' . $key;
+        $newKey = $keyName === '' ? $key : $keyName . '.' . $key;
         switch ($type) {
             case 'nested':
                 return getPlain($value1, $newKey);
@@ -38,7 +38,7 @@ function getPlain(mixed $diffArray, string $parentKey = ''): string
             default:
                 throw new \Exception("Unknown node type: {$type}");
         }
-    }, $diffArray);
+    }, $diff);
     $result = array_filter($result);
     return implode("\n", $result);
 }
