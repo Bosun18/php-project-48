@@ -32,6 +32,16 @@ class DiffTest extends TestCase
         $file2 = $this->fixturePath('file8.yaml');
         $result = file_get_contents($this->fixturePath('resultPlain.txt'));
         $this->assertEquals($result, genDiff($file1, $file2, 'plain'));
+
+        $file1 = $this->fixturePath('file5.json');
+        $file2 = $this->fixturePath('file6.json');
+        $result = file_get_contents($this->fixturePath('resultJson.txt'));
+        $this->assertEquals($result, genDiff($file1, $file2, 'json'));
+
+        $file1 = $this->fixturePath('file7.yaml');
+        $file2 = $this->fixturePath('file8.yaml');
+        $result = file_get_contents($this->fixturePath('resultJson.txt'));
+        $this->assertEquals($result, genDiff($file1, $file2, 'json'));
     }
 
     private function fixturePath($fixtureName): string
