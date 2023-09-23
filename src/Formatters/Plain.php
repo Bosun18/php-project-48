@@ -39,6 +39,5 @@ function getPlain(mixed $diff, string $keyName = ''): string
                 throw new \Exception("Unknown node type: {$type}");
         }
     }, $diff);
-    $result = array_filter($result);
-    return implode("\n", $result);
+    return implode("\n", array_filter($result));
 }
