@@ -27,23 +27,19 @@ function getStylish(mixed $diff, string $replacer = ' ', int $spaceCount = 4): s
 
         $str = array_map(
             function ($item, $key) use ($indent, $indentStr, $iter, $depth) {
-                if (!is_array($item)) {
-                    return $indent . $key . ': ' . $iter($item, $depth + 1);
-                }
-                if (!array_key_exists('type', $item)) {
-                    return $indent . $key . ': ' . $iter($item, $depth + 1);
-                }
-                if ($item['type'] === 'added') {
-                    return $indentStr . '+ ' . $item['key'] . ': ' . $iter($item['value2'], $depth + 1);
-                }
-                if ($item['type'] === 'deleted') {
-                    return $indentStr . '- ' . $item['key'] . ': ' . $iter($item['value1'], $depth + 1);
-                }
-                if ($item['type'] === 'updated') {
-                    return  $indentStr . '- ' . $item['key'] . ': ' . $iter($item['value1'], $depth + 1) . "\n"
-                        .  $indentStr . '+ ' . $item['key'] . ': ' . $iter($item['value2'], $depth + 1);
-                }
-                return $indent . $item['key'] . ': ' . $iter($item['value1'], $depth + 1);
+                return match (true) {
+                    (!is_array($item)), (!array_key_exists('type', $item)) =>
+                        $indent . $key . ': ' . $iter($item, $depth + 1),
+                    ($item['type'] === 'added') =>
+                        $indentStr . '+ ' . $item['key'] . ': ' . $iter($item['value2'], $depth + 1),
+                    ($item['type'] === 'deleted') =>
+                        $indentStr . '- ' . $item['key'] . ': ' . $iter($item['value1'], $depth + 1),
+                    ($item['type'] === 'updated') =>
+                        $indentStr . '- ' . $item['key'] . ': ' . $iter($item['value1'], $depth + 1) . "\n" .
+                        $indentStr . '+ ' . $item['key'] . ': ' . $iter($item['value2'], $depth + 1),
+                    default =>
+                        $indent . $item['key'] . ': ' . $iter($item['value1'], $depth + 1)
+                };
             },
             $currentValue,
             array_keys($currentValue)
