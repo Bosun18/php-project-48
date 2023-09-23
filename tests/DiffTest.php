@@ -8,6 +8,10 @@ use function Differ\Differ\genDiff;
 
 class DiffTest extends TestCase
 {
+    public function getFixturePath($fixtureName): string
+    {
+        return __DIR__ . "/fixtures/" . $fixtureName;
+    }
     /**
      * @throws \Exception
      */
@@ -42,10 +46,5 @@ class DiffTest extends TestCase
         $file2 = $this->getFixturePath('file8.yaml');
         $result = file_get_contents($this->getFixturePath('resultJson.txt'));
         $this->assertEquals($result, genDiff($file1, $file2, 'json'));
-    }
-
-    private function getFixturePath($fixtureName): string
-    {
-        return __DIR__ . "/fixtures/" . $fixtureName;
     }
 }

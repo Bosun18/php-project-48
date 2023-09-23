@@ -5,52 +5,52 @@ namespace Differ\Differ;
 use function Differ\Parsers\parse;
 use function Differ\Formatter\getFormatter;
 
-function getTree(mixed $array1, mixed $array2): array
+function getTree(mixed $data1, mixed $data2): array
 {
-    $keys = array_unique(array_merge(array_keys($array1), array_keys($array2)));
+    $keys = array_unique(array_merge(array_keys($data1), array_keys($data2)));
     sort($keys, SORT_REGULAR);
 
     $result = array_map(
-        function ($key) use ($array1, $array2) {
+        function ($key) use ($data1, $data2) {
             if (
-                array_key_exists($key, $array1) && array_key_exists($key, $array2)
-                && is_array($array1[$key]) && is_array($array2[$key])
+                array_key_exists($key, $data1) && array_key_exists($key, $data2)
+                && is_array($data1[$key]) && is_array($data2[$key])
             ) {
-                $nestedComparison = getTree($array1[$key], $array2[$key]);
+                $comparison = getTree($data1[$key], $data2[$key]);
 
                 return [
                     'key' => $key,
                     'type' => 'nested',
-                    'value1' => $nestedComparison,
-                    'value2' => $nestedComparison,
+                    'value1' => $comparison,
+                    'value2' => $comparison,
                 ];
-            } elseif (!array_key_exists($key, $array2)) {
+            } elseif (!array_key_exists($key, $data2)) {
                 return [
                     'key' => $key,
                     'type' => 'deleted',
-                    'value1' => $array1[$key],
+                    'value1' => $data1[$key],
                     'value2' => null,
                 ];
-            } elseif (!array_key_exists($key, $array1)) {
+            } elseif (!array_key_exists($key, $data1)) {
                 return  [
                     'key' => $key,
                     'type' => 'added',
                     'value1' => null,
-                    'value2' => $array2[$key],
+                    'value2' => $data2[$key],
                 ];
-            } elseif ($array1[$key] !== $array2[$key]) {
+            } elseif ($data1[$key] !== $data2[$key]) {
                 return  [
                     'key' => $key,
                     'type' => 'updated',
-                    'value1' => $array1[$key],
-                    'value2' => $array2[$key],
+                    'value1' => $data1[$key],
+                    'value2' => $data2[$key],
                 ];
             } else {
                 return [
                     'key' => $key,
                     'type' => 'immutable',
-                    'value1' => $array1[$key],
-                    'value2' => $array2[$key],
+                    'value1' => $data1[$key],
+                    'value2' => $data2[$key],
                 ];
             }
         },

@@ -20,12 +20,12 @@ function getStylish(mixed $diff, string $replacer = ' ', int $spaceCount = 4): s
         }
 
         $indentLength = $spaceCount * $depth;
-        $shiftToLeft = 2;
+        $shift = 2;
         $indent = str_repeat($replacer, $indentLength);
-        $indentStr = str_repeat($replacer, $indentLength - $shiftToLeft);
+        $indentStr = str_repeat($replacer, $indentLength - $shift);
         $indentBrace = str_repeat($replacer, $indentLength - $spaceCount);
 
-        $string = array_map(
+        $str = array_map(
             function ($item, $key) use ($indent, $indentStr, $iter, $depth) {
                 if (!is_array($item)) {
                     return $indent . $key . ': ' . $iter($item, $depth + 1);
@@ -48,7 +48,7 @@ function getStylish(mixed $diff, string $replacer = ' ', int $spaceCount = 4): s
             $currentValue,
             array_keys($currentValue)
         );
-        $result = ['{', ...$string, $indentBrace . '}'];
+        $result = ['{', ...$str, $indentBrace . '}'];
         return implode("\n", $result);
     };
     return $iter($diff, 1);
