@@ -44,8 +44,7 @@ function getStylish(mixed $diff, string $replacer = ' ', int $spaceCount = 4): s
             $currentValue,
             array_keys($currentValue)
         );
-        $result = ['{', ...$str, $indentBrace . '}'];
-        return implode("\n", $result);
+        return implode("\n", ['{', ...$str, $indentBrace . '}']);
     };
     return $iter($diff, 1);
 }
