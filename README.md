@@ -1,5 +1,5 @@
 ## Вычислитель отличий
-### Hexlet tests and linter status:
+### Hexlet tests and linter status
 [![Actions Status](https://github.com/Bosun18/php-project-48/workflows/hexlet-check/badge.svg)](https://github.com/Bosun18/php-project-48/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d99d922887e56fc82ffb/maintainability)](https://codeclimate.com/github/Bosun18/php-project-48/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d99d922887e56fc82ffb/test_coverage)](https://codeclimate.com/github/Bosun18/php-project-48/test_coverage)
