@@ -8,14 +8,14 @@ use function Differ\Differ\genDiff;
 
 class DiffTest extends TestCase
 {
-    public function getFixturePath($fixtureName): string
+    public function getFixturePath(string $fixtureName): string
     {
         return __DIR__ . "/fixtures/" . $fixtureName;
     }
     /**
      * @throws \Exception
      */
-    public function testGenDiff()
+    public function testGenDiff(): void
     {
         $file1 = $this->getFixturePath('file5.json');
         $file2 = $this->getFixturePath('file6.json');
