@@ -20,23 +20,23 @@ function getPlain(mixed $diff, string $keyName = ''): string
         $key =  $node['key'];
         $value1 = $node['value1'];
         $value2 = $node['value2'];
-        $newKey = $keyName === '' ? $key : $keyName . '.' . $key;
+        $newKey = $keyName === '' ? $key : "$keyName.$key";
         switch ($type) {
             case 'nested':
                 return getPlain($value1, $newKey);
             case 'added':
                 $normalize = normalize($value2);
-                return "Property '" . $newKey . "' was added with value: " . $normalize;
+                return "Property '$newKey' was added with value: $normalize";
             case 'deleted':
-                return "Property '" . $newKey . "' was removed";
+                return "Property '$newKey' was removed";
             case 'updated':
                 $normalize1 = normalize($value1);
                 $normalize2 = normalize($value2);
-                return "Property '" . $newKey . "' was updated. From " . $normalize1 . ' to ' . $normalize2;
+                return "Property '$newKey' was updated. From $normalize1 to $normalize2";
             case 'immutable':
                 break;
             default:
-                throw new \Exception("Unknown node type: {$type}");
+                throw new \Exception("Unknown node type: $type");
         }
     }, $diff);
     return implode("\n", array_filter($result));
