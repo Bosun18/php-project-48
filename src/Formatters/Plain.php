@@ -6,7 +6,10 @@ function normalize(mixed $value): string|int|float|bool
 {
     if (!is_array($value)) {
         return match ($value) {
-            'null', 'true', 'false' => $value,
+//            'null', 'true', 'false' => $value,
+            false => "false",
+            true => "true",
+            null => "null",
             default => is_numeric($value) ? $value : "'{$value}'",
         };
     }

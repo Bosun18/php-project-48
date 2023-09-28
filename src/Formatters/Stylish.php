@@ -28,9 +28,9 @@ function getResultValue(mixed $data): array|string
 {
     if (!is_array($data)) {
         return match ($data) {
-            false => 'false',
-            true => 'true',
-            null => 'null',
+            false => "false",
+            true => "true",
+            null => "null",
             default => is_numeric($data) ? $data : "{$data}"
         };
     }
