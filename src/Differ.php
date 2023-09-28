@@ -57,17 +57,17 @@ function buildTree(mixed $data1, mixed $data2): array
     );
 }
 
-function getResultValue(mixed $data): array
-{
-    return array_map(function ($value) {
-        return match ($value) {
-            false => 'false',
-            true => 'true',
-            null => 'null',
-            default => is_array($value) ? getResultValue($value) : $value
-        };
-    }, $data);
-}
+//function getResultValue(mixed $data): array
+//{
+//    return array_map(function ($value) {
+//        return match ($value) {
+//            false => 'false',
+//            true => 'true',
+//            null => 'null',
+//            default => is_array($value) ? getResultValue($value) : $value
+//        };
+//    }, $data);
+//}
 
 /**
  * @throws \Exception
