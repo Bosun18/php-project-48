@@ -18,9 +18,15 @@
 [![asciicast](https://asciinema.org/a/tfYg75aLPYN9iUsNhcoVyWNkQ.svg)](https://asciinema.org/a/tfYg75aLPYN9iUsNhcoVyWNkQ)
 ### Asciinema gendif file3.yaml file4.yaml
 [![asciicast](https://asciinema.org/a/jm1qc4dSzM1WPRi83J3rQPMdp.svg)](https://asciinema.org/a/jm1qc4dSzM1WPRi83J3rQPMdp)
-### Asciinema gendif stylish file5.json file6.json and file7.yaml file8.yaml
-[![asciicast](https://asciinema.org/a/ezNh9RXe7j4xVIkESQJLLgrgR.svg)](https://asciinema.org/a/ezNh9RXe7j4xVIkESQJLLgrgR)
-### Asciinema gendif plain file5.json file6.json and file7.yaml file8.yaml
-[![asciicast](https://asciinema.org/a/UMLE1ijiIUCXTaIphWS0BvsTO.svg)](https://asciinema.org/a/UMLE1ijiIUCXTaIphWS0BvsTO)
-### Asciinema gendif json file1.json file2.json and file3.yaml file4.yaml
-[![asciicast](https://asciinema.org/a/sgi7zYTcAKIeX3F2ZFmNxbQYx.svg)](https://asciinema.org/a/sgi7zYTcAKIeX3F2ZFmNxbQYx)
+### Asciinema gendif stylish file5.json file6.json
+[![asciicast](https://asciinema.org/a/victe1nc8W5WlUGWEwSBvOSCe.svg)](https://asciinema.org/a/victe1nc8W5WlUGWEwSBvOSCe)
+### Asciinema gendif stylish file7.yaml file8.yaml
+[![asciicast](https://asciinema.org/a/Eyz9IfmrjgJb2IvnlxmNrbbZd.svg)](https://asciinema.org/a/Eyz9IfmrjgJb2IvnlxmNrbbZd)
+### Asciinema gendif plain file5.json file6.json
+[![asciicast](https://asciinema.org/a/3ytD2DRCoGZ3OhUgcNPk9xdpj.svg)](https://asciinema.org/a/3ytD2DRCoGZ3OhUgcNPk9xdpj)
+### Asciinema gendif plain file7.yaml file8.yaml
+[![asciicast](https://asciinema.org/a/QoxrbZxn2pCNPMjQQhlRWZeOZ.svg)](https://asciinema.org/a/QoxrbZxn2pCNPMjQQhlRWZeOZ)
+### Asciinema gendif json file1.json file2.json
+[![asciicast](https://asciinema.org/a/pAL52GgEEur2TsjshPh2HeWl1.svg)](https://asciinema.org/a/pAL52GgEEur2TsjshPh2HeWl1)
+### Asciinema gendif json file3.yaml file4.yaml
+[![asciicast](https://asciinema.org/a/5Szne1y1XL7wvpjQHxUrt0UnD.svg)](https://asciinema.org/a/5Szne1y1XL7wvpjQHxUrt0UnD)
