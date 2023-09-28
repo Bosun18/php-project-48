@@ -2,7 +2,7 @@
 
 namespace Differ\Formatters\Plain;
 
-function normalize(mixed $value): string|int|float
+function normalize(mixed $value): string|int|float|bool
 {
     if (!is_array($value)) {
         return match ($value) {

@@ -74,8 +74,11 @@ function getResultValue(mixed $data): array
  */
 function genDiff(string $pathToFile1, string $pathToFile2, string $format = 'stylish'): string
 {
-    $data1 = getResultValue(parse($pathToFile1));
-    $data2 = getResultValue(parse($pathToFile2));
+//    $data1 = getResultValue(parse($pathToFile1));
+//    $data2 = getResultValue(parse($pathToFile2));
+
+    $data1 = parse($pathToFile1);
+    $data2 = parse($pathToFile2);
 
     $diff = buildTree($data1, $data2);
 
