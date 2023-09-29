@@ -31,7 +31,7 @@ function getResultValue(mixed $data): array|string
             false => "false",
             true => "true",
             null => "null",
-            default => is_numeric($data) ? $data : "{$data}"
+            default => $data
         };
     }
     return $data;
@@ -40,7 +40,7 @@ function getResultValue(mixed $data): array|string
 function iter(mixed $currentValue, int $depth, string $replacer, int $spaceCount): string
 {
     if (!is_array($currentValue)) {
-        return toString($currentValue);
+        return getResultValue(toString($currentValue));
     }
 
     $indentLength = $spaceCount * $depth;
