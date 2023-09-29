@@ -11,11 +11,10 @@ use function Differ\Formatters\Json\getJson;
  */
 function getFormatter(mixed $diff, string $format): string
 {
-    $result = match ($format) {
+    return match ($format) {
         'stylish' => getStylish($diff),
         'plain' => getPlain($diff),
         'json' => getJson($diff),
         default => throw new \Exception('Unknown format ' . $format),
     };
-    return $result;
 }
