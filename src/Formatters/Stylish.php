@@ -11,7 +11,7 @@ function getStylish(mixed $diff, int $depth = 1, string $replacer = ' ', int $sp
 {
     return iter($diff, $depth, $replacer, $spaceCount);
 }
-function getResultValue(mixed $data): array|string
+function normalize(mixed $data): array|string
 {
     if (!is_array($data)) {
         return match ($data) {
@@ -27,7 +27,7 @@ function getResultValue(mixed $data): array|string
 function iter(mixed $currentValue, int $depth, string $replacer, int $spaceCount): string
 {
     if (!is_array($currentValue)) {
-        return getResultValue(toString($currentValue));
+        return normalize(toString($currentValue));
     }
 
     $indentLength = $spaceCount * $depth;
@@ -41,25 +41,25 @@ function iter(mixed $currentValue, int $depth, string $replacer, int $spaceCount
             switch (true) {
                 case (!is_array($item)):
                 case (!array_key_exists('type', $item)):
-                    $normalize = getResultValue($item);
+                    $normalize = normalize($item);
                     return $indent . $key . ': ' . iter($normalize, $depth + 1, $replacer, $spaceCount);
                 case ($item['type'] === 'added'):
-                    $normalize = getResultValue($item['value2']);
+                    $normalize = normalize($item['value2']);
                     return $indentStr . '+ ' . $item['key'] . ': ' .
                 iter($normalize, $depth + 1, $replacer, $spaceCount);
                 case ($item['type'] === 'deleted'):
-                    $normalize = getResultValue($item['value1']);
+                    $normalize = normalize($item['value1']);
                     return $indentStr . '- ' . $item['key'] . ': ' .
                         iter($normalize, $depth + 1, $replacer, $spaceCount);
                 case ($item['type'] === 'updated'):
-                    $normalize1 = getResultValue($item['value1']);
-                    $normalize2 = getResultValue($item['value2']);
+                    $normalize1 = normalize($item['value1']);
+                    $normalize2 = normalize($item['value2']);
                     return $indentStr . '- ' . $item['key'] . ': ' .
                         iter($normalize1, $depth + 1, $replacer, $spaceCount)
                     . "\n" . $indentStr . '+ ' . $item['key'] . ': ' .
                         iter($normalize2, $depth + 1, $replacer, $spaceCount);
                 default:
-                    $normalize = getResultValue($item['value1']);
+                    $normalize = normalize($item['value1']);
                     return $indent . $item['key'] . ': ' . iter($normalize, $depth + 1, $replacer, $spaceCount);
             }
         },
