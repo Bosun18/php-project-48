@@ -82,5 +82,5 @@ function genDiff(string $pathToFile1, string $pathToFile2, string $format = 'sty
 
     $diff = buildTree($data1, $data2);
 
-    return getFormatter($diff, $format) . "\n";
+    return getFormatter($diff, $format);
 }
