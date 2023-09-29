@@ -6,7 +6,6 @@ function normalize(mixed $value): string|int|float
 {
     if (!is_array($value)) {
         return match ($value) {
-//            'null', 'true', 'false' => $value,
             false => "false",
             true => "true",
             null => "null",

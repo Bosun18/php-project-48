@@ -57,26 +57,11 @@ function buildTree(mixed $data1, mixed $data2): array
     );
 }
 
-//function getResultValue(mixed $data): array
-//{
-//    return array_map(function ($value) {
-//        return match ($value) {
-//            false => 'false',
-//            true => 'true',
-//            null => 'null',
-//            default => is_array($value) ? getResultValue($value) : $value
-//        };
-//    }, $data);
-//}
-
 /**
  * @throws \Exception
  */
 function genDiff(string $pathToFile1, string $pathToFile2, string $format = 'stylish'): string
 {
-//    $data1 = getResultValue(parse($pathToFile1));
-//    $data2 = getResultValue(parse($pathToFile2));
-
     $data1 = parse($pathToFile1);
     $data2 = parse($pathToFile2);
 
