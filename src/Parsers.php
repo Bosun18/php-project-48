@@ -7,22 +7,8 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * @throws \Exception
  */
-function getFileData(string $pathToFile): string
+function parse(mixed $data, $extension): array
 {
-    $data = file_get_contents($pathToFile);
-    if (file_exists($pathToFile)) {
-        return $data;
-    }
-    throw new \Exception("File not found", 1);
-}
-
-/**
- * @throws \Exception
- */
-function parse(string $pathToFile): array
-{
-    $data = getFileData($pathToFile);
-    $extension = pathinfo($pathToFile, PATHINFO_EXTENSION);
     return match ($extension) {
         'yaml', 'yml' => Yaml::parse($data),
         'json' => json_decode($data, true),

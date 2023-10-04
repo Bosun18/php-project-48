@@ -27,14 +27,14 @@ function getPlain(mixed $diff, string $keyName = ''): string
             case 'nested':
                 return getPlain($value, $newKey);
             case 'added':
-                $normalize = normalize($value);
-                return "Property '$newKey' was added with value: $normalize";
+                $normalizeValue = normalize($value);
+                return "Property '$newKey' was added with value: $normalizeValue";
             case 'deleted':
                 return "Property '$newKey' was removed";
             case 'updated':
-                $normalize1 = normalize($value);
-                $normalize2 = normalize($value2);
-                return "Property '$newKey' was updated. From $normalize1 to $normalize2";
+                $normalizeValue1 = normalize($value);
+                $normalizeValue2 = normalize($value2);
+                return "Property '$newKey' was updated. From $normalizeValue1 to $normalizeValue2";
             case 'immutable':
                 break;
             default:
