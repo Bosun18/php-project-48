@@ -20,8 +20,8 @@ function getPlain(mixed $diff, string $keyName = ''): string
     $result = array_map(function ($node) use ($keyName) {
         $type = $node['type'];
         $key =  $node['key'];
-        $value = $node['value'];
-        $value2 = $node['value2'];
+        $value = $node['value'] ?? null;
+        $value2 = $node['value2'] ?? null;
         $newKey = $keyName === '' ? $key : "$keyName.$key";
         switch ($type) {
             case 'nested':
