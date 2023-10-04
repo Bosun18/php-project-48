@@ -7,7 +7,7 @@ function toString(string $value): string
     return trim(var_export($value, true), "'");
 }
 
-function getStylish(mixed $diff, int $depth = 1, string $replacer = ' ', int $spaceCount = 4): string
+function getStylish(mixed $diff, int $depth = 1, string $replacer = ' ', int $spaceCount = 2): string
 {
     return iter($diff, $depth, $replacer, $spaceCount);
 }
