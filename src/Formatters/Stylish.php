@@ -44,22 +44,22 @@ function iter(mixed $currentValue, int $depth, string $replacer, int $spaceCount
                     $normalize = normalize($item);
                     return $indent . $key . ': ' . iter($normalize, $depth + 1, $replacer, $spaceCount);
                 case ($item['type'] === 'added'):
-                    $normalize = normalize($item['value2']);
+                    $normalize = normalize($item['value']);
                     return $indentStr . '+ ' . $item['key'] . ': ' .
                 iter($normalize, $depth + 1, $replacer, $spaceCount);
                 case ($item['type'] === 'deleted'):
-                    $normalize = normalize($item['value1']);
+                    $normalize = normalize($item['value']);
                     return $indentStr . '- ' . $item['key'] . ': ' .
                         iter($normalize, $depth + 1, $replacer, $spaceCount);
                 case ($item['type'] === 'updated'):
-                    $normalize1 = normalize($item['value1']);
+                    $normalize1 = normalize($item['value']);
                     $normalize2 = normalize($item['value2']);
                     return $indentStr . '- ' . $item['key'] . ': ' .
                         iter($normalize1, $depth + 1, $replacer, $spaceCount)
                     . "\n" . $indentStr . '+ ' . $item['key'] . ': ' .
                         iter($normalize2, $depth + 1, $replacer, $spaceCount);
                 default:
-                    $normalize = normalize($item['value1']);
+                    $normalize = normalize($item['value']);
                     return $indent . $item['key'] . ': ' . iter($normalize, $depth + 1, $replacer, $spaceCount);
             }
         },

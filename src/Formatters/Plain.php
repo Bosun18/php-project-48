@@ -20,19 +20,19 @@ function getPlain(mixed $diff, string $keyName = ''): string
     $result = array_map(function ($node) use ($keyName) {
         $type = $node['type'];
         $key =  $node['key'];
-        $value1 = $node['value1'];
+        $value = $node['value'];
         $value2 = $node['value2'];
         $newKey = $keyName === '' ? $key : "$keyName.$key";
         switch ($type) {
             case 'nested':
-                return getPlain($value1, $newKey);
+                return getPlain($value, $newKey);
             case 'added':
-                $normalize = normalize($value2);
+                $normalize = normalize($value);
                 return "Property '$newKey' was added with value: $normalize";
             case 'deleted':
                 return "Property '$newKey' was removed";
             case 'updated':
-                $normalize1 = normalize($value1);
+                $normalize1 = normalize($value);
                 $normalize2 = normalize($value2);
                 return "Property '$newKey' was updated. From $normalize1 to $normalize2";
             case 'immutable':

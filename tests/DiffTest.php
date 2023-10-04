@@ -28,6 +28,9 @@ class DiffTest extends TestCase
         $this->assertEquals($result, genDiff($file1, $file2, 'stylish'));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testPlainGenDiff(): void
     {
 
@@ -42,6 +45,9 @@ class DiffTest extends TestCase
         $this->assertEquals($result, genDiff($file1, $file2, 'plain'));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testJsonGenDiff(): void
     {
         $file1 = $this->getFixturePath('file5.json');

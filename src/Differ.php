@@ -20,36 +20,32 @@ function buildTree(mixed $data1, mixed $data2): array
                 return [
                     'key' => $key,
                     'type' => 'nested',
-                    'value1' => buildTree($data1[$key], $data2[$key]),
-                    'value2' => buildTree($data1[$key], $data2[$key]),
+                    'value' => buildTree($data1[$key], $data2[$key]),
                 ];
             } elseif (!array_key_exists($key, $data2)) {
                 return [
                     'key' => $key,
                     'type' => 'deleted',
-                    'value1' => $data1[$key],
-                    'value2' => null,
+                    'value' => $data1[$key],
                 ];
             } elseif (!array_key_exists($key, $data1)) {
                 return  [
                     'key' => $key,
                     'type' => 'added',
-                    'value1' => null,
-                    'value2' => $data2[$key],
+                    'value' => $data2[$key],
                 ];
             } elseif ($data1[$key] !== $data2[$key]) {
                 return  [
                     'key' => $key,
                     'type' => 'updated',
-                    'value1' => $data1[$key],
+                    'value' => $data1[$key],
                     'value2' => $data2[$key],
                 ];
             } else {
                 return [
                     'key' => $key,
                     'type' => 'immutable',
-                    'value1' => $data1[$key],
-                    'value2' => $data2[$key],
+                    'value' => $data1[$key]
                 ];
             }
         },
