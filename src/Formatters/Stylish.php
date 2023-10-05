@@ -15,18 +15,18 @@ function getStylish(array $diff): string
 
 function normalize(mixed $value, int $depth): string
 {
-    if (is_null($value)) {
-        return 'null';
-    }
-    if (is_bool($value)) {
-        return $value ? 'true' : 'false';
-    }
     if (is_array($value)) {
         $result = makeString($value, $depth);
         $indent = makeIndent($depth);
         return "{{$result}\n$indent}";
+    } else {
+        return match ($value) {
+            false => "false",
+            true => "true",
+            null => "null",
+            default => "$value" ?? null,
+        };
     }
-    return "$value";
 }
 
 function iter(array $diff, int $depth = 0): array
