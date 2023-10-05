@@ -24,7 +24,7 @@ function normalize(mixed $value, int $depth): string
             false => "false",
             true => "true",
             null => "null",
-            default => "$value" ?? null,
+            default => "$value",
         };
     }
 }
