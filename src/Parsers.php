@@ -7,7 +7,7 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * @throws \Exception
  */
-function parse(mixed $data, $extension): array
+function parse(mixed $data, string $extension): array
 {
     return match ($extension) {
         'yaml', 'yml' => Yaml::parse($data),
