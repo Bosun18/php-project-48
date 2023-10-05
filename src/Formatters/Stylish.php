@@ -63,7 +63,8 @@ function iter(mixed $currentValue, int $depth, string $replacer, int $spaceCount
                     if (is_array($normalizeValue)) {
                         break;
                     } else {
-                        return $indent . $item['key'] . ': ' . iter($normalizeValue, $depth + 1, $replacer, $spaceCount);
+                        return $indent . $item['key'] . ': ' .
+                            iter($normalizeValue, $depth + 1, $replacer, $spaceCount);
                     }
             }
         },
