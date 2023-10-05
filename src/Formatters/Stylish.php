@@ -15,18 +15,18 @@ function getStylish(array $diff): string
 
 function normalize(mixed $value, int $depth): string
 {
-    if (is_null($value)) {
-        return 'null';
-    }
-    if (is_bool($value)) {
-        return $value ? 'true' : 'false';
-    }
     if (is_array($value)) {
         $result = makeString($value, $depth);
         $indent = makeIndent($depth);
         return "{{$result}\n$indent}";
+    } else {
+        return match ($value) {
+            false => "false",
+            true => "true",
+            null => "null",
+            default => "$value"
+        };
     }
-    return "$value";
 }
 
 function iter(array $diff, int $depth = 0): array
@@ -37,6 +37,7 @@ function iter(array $diff, int $depth = 0): array
         $key = $currentValue['key'];
         $type = $currentValue['type'];
         $value = $currentValue['value'];
+        $value2 = $currentValue['value2'];
 
         switch ($type) {
             case 'nested':
@@ -54,7 +55,7 @@ function iter(array $diff, int $depth = 0): array
                 return "$indent  - $key: $normalizeValue";
             case 'updated':
                 $normalizeValue = normalize($value, $shift);
-                $normalizeValue2 = normalize($currentValue['value2'], $shift);
+                $normalizeValue2 = normalize($value2, $shift);
                 return "$indent  - $key: $normalizeValue\n$indent  + $key: $normalizeValue2";
             default:
                 throw new Exception("Unknown type: $type");
@@ -66,7 +67,6 @@ function makeIndent(int $depth): string
 {
     return str_repeat("    ", $depth);
 }
-
 
 function makeString(array $value, int $depth): string
 {
