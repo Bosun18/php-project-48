@@ -34,11 +34,19 @@ function iter(mixed $currentValue, int $depth, string $replacer, int $spaceCount
                 case (!is_array($item)):
                 case (!array_key_exists('type', $item)):
                     $normalizeValue = normalize($item);
-                    return $indent . $key . ': ' . iter($normalizeValue, $depth + 1, $replacer, $spaceCount);
+                    if (!is_array($normalizeValue)) {
+                        break;
+                    } else {
+                        return $indent . $key . ': ' . iter($normalizeValue, $depth + 1, $replacer, $spaceCount);
+                    }
                 case ($item['type'] === 'added'):
                     $normalizeValue = normalize($item['value']);
-                    return $indentStr . '+ ' . $item['key'] . ': ' .
-                iter($normalizeValue, $depth + 1, $replacer, $spaceCount);
+                    if (!is_array($normalizeValue)) {
+                        break;
+                    } else {
+                        return $indentStr . '+ ' . $item['key'] . ': ' .
+                            iter($normalizeValue, $depth + 1, $replacer, $spaceCount);
+                    }
                 case ($item['type'] === 'deleted'):
                     $normalizeValue = normalize($item['value']);
                     return $indentStr . '- ' . $item['key'] . ': ' .
@@ -52,7 +60,11 @@ function iter(mixed $currentValue, int $depth, string $replacer, int $spaceCount
                         iter($normalizeValue2, $depth + 1, $replacer, $spaceCount);
                 default:
                     $normalizeValue = normalize($item['value']);
-                    return $indent . $item['key'] . ': ' . iter($normalizeValue, $depth + 1, $replacer, $spaceCount);
+                    if (is_array($normalizeValue)) {
+                        break;
+                    } else {
+                        return $indent . $item['key'] . ': ' . iter($normalizeValue, $depth + 1, $replacer, $spaceCount);
+                    }
             }
         },
         $currentValue,
