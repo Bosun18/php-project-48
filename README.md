@@ -26,7 +26,7 @@
 [![asciicast](https://asciinema.org/a/3ytD2DRCoGZ3OhUgcNPk9xdpj.svg)](https://asciinema.org/a/3ytD2DRCoGZ3OhUgcNPk9xdpj)
 ### Asciinema gendif plain file7.yaml file8.yaml
 [![asciicast](https://asciinema.org/a/QoxrbZxn2pCNPMjQQhlRWZeOZ.svg)](https://asciinema.org/a/QoxrbZxn2pCNPMjQQhlRWZeOZ)
-### Asciinema gendif json file1.json file2.json
-[![asciicast](https://asciinema.org/a/pAL52GgEEur2TsjshPh2HeWl1.svg)](https://asciinema.org/a/pAL52GgEEur2TsjshPh2HeWl1)
-### Asciinema gendif json file3.yaml file4.yaml
-[![asciicast](https://asciinema.org/a/5Szne1y1XL7wvpjQHxUrt0UnD.svg)](https://asciinema.org/a/5Szne1y1XL7wvpjQHxUrt0UnD)
+### Asciinema gendif json file5.json file6.json
+[![asciicast](https://asciinema.org/a/ucKZHHnn1xefFFZX0fUP2Eqek.svg)](https://asciinema.org/a/ucKZHHnn1xefFFZX0fUP2Eqek)
+### Asciinema gendif json file7.yaml file8.yaml
+[![asciicast](https://asciinema.org/a/O97xUzRKjz2uUaa9BqN86dkHj.svg)](https://asciinema.org/a/O97xUzRKjz2uUaa9BqN86dkHj)
