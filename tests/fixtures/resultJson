@@ -9,12 +9,12 @@
         "value": false
       },
       {
-        "type": "unchanged",
+        "type": "immutable",
         "key": "setting1",
         "value": "Value 1"
       },
       {
-        "type": "removed",
+        "type": "deleted",
         "key": "setting2",
         "value": 200
       },
@@ -53,7 +53,7 @@
             ]
           },
           {
-            "type": "unchanged",
+            "type": "immutable",
             "key": "key",
             "value": "value"
           },

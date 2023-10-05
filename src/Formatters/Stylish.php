@@ -2,117 +2,18 @@
 
 namespace Differ\Formatters\Stylish;
 
-//function getStylish(array $diff, int $depth = 1, string $replacer = ' ', int $spaceCount = 4): string
-//{
-//    return iter($diff, $depth, $replacer, $spaceCount);
-//}
-//function normalize(mixed $data): array|string
-//{
-//    if (!is_array($data)) {
-//        return match ($data) {
-//            false => "false",
-//            true => "true",
-//            null => "null",
-//            default => $data
-//        };
-//    }
-//    return $data;
-//}
-//
-//function iter(mixed $currentValue, int $depth, string $replacer, int $spaceCount): string
-//{
-//
-//    $indentLength = $spaceCount * $depth;
-//    $shift = 2;
-//    $indent = str_repeat($replacer, $indentLength);
-//    $indentStr = str_repeat($replacer, $indentLength - $shift);
-//    $indentBrace = str_repeat($replacer, $indentLength - $spaceCount);
-//
-//    $str = array_map(
-//        function ($item, $key) use ($spaceCount, $indent, $indentStr, $replacer, $depth) {
-//            switch (true) {
-//                case (!is_array($item)):
-//                case (!array_key_exists('type', $item)):
-//                    $normalizeValue = normalize($item);
-//                    if (!is_array($normalizeValue)) {
-//                        break;
-//                    } else {
-//                        return $indent . $key . ': ' . iter($normalizeValue, $depth + 1, $replacer, $spaceCount);
-//                    }
-//                case ($item['type'] === 'added'):
-//                    $normalizeValue = normalize($item['value']);
-//                    if (!is_array($normalizeValue)) {
-//                        break;
-//                    } else {
-//                        return $indentStr . '+ ' . $item['key'] . ': ' .
-//                            iter($normalizeValue, $depth + 1, $replacer, $spaceCount);
-//                    }
-//                case ($item['type'] === 'deleted'):
-//                    $normalizeValue = normalize($item['value']);
-//                    return $indentStr . '- ' . $item['key'] . ': ' .
-//                        iter($normalizeValue, $depth + 1, $replacer, $spaceCount);
-//                case ($item['type'] === 'updated'):
-//                    $normalizeValue1 = normalize($item['value']);
-//                    $normalizeValue2 = normalize($item['value2']);
-//                    return $indentStr . '- ' . $item['key'] . ': ' .
-//                        iter($normalizeValue1, $depth + 1, $replacer, $spaceCount)
-//                    . "\n" . $indentStr . '+ ' . $item['key'] . ': ' .
-//                        iter($normalizeValue2, $depth + 1, $replacer, $spaceCount);
-//                default:
-//                    $normalizeValue = normalize($item['value']);
-//                    if (is_array($normalizeValue)) {
-//                        break;
-//                    } else {
-//                        return $indent . $item['key'] . ': ' .
-//                            iter($normalizeValue, $depth + 1, $replacer, $spaceCount);
-//                    }
-//            }
-//        },
-//        $currentValue,
-//        array_keys($currentValue)
-//    );
-//    return implode("\n", ['{', ...$str, $indentBrace . '}']);
-//}
+use Exception;
 
-function formatToStringFromDiffTree(array $diffTree, int $depth = 0): array
+/**
+ * @throws Exception
+ */
+function getStylish(array $diff): string
 {
-    $indent = buildIndent($depth);
-    $depthOfDepth = $depth + 1;
-    return array_map(function ($node) use ($indent, $depthOfDepth) {
-        $key = $node['key'];
-        $type = $node['type'];
-        $value = $node['value'];
-
-        switch ($type) {
-            case 'nested':
-                $nested = formatToStringFromDiffTree($value, $depthOfDepth);
-                $stringifiedNest = implode("\n", $nested);
-                return "{$indent}    {$key}: {\n{$stringifiedNest}\n{$indent}    }";
-            case 'immutable':
-                $stringifiedValue = valueToString($value, $depthOfDepth);
-                return "{$indent}    {$key}: {$stringifiedValue}";
-            case 'added':
-                $stringifiedValue = valueToString($value, $depthOfDepth);
-                return "{$indent}  + {$key}: {$stringifiedValue}";
-            case 'deleted':
-                $stringifiedValue = valueToString($value, $depthOfDepth);
-                return "{$indent}  - {$key}: {$stringifiedValue}";
-            case 'updated':
-                $stringifiedValue = valueToString($value, $depthOfDepth);
-                $stringifiedValue2 = valueToString($node['value2'], $depthOfDepth);
-                return "{$indent}  - {$key}: {$stringifiedValue}\n{$indent}  + {$key}: {$stringifiedValue2}";
-            default:
-                throw new \Exception("Unknown type - $type");
-        }
-    }, $diffTree);
+    $result = implode("\n", iter($diff));
+    return "{\n$result\n}";
 }
 
-function buildIndent(int $depth)
-{
-    return str_repeat("    ", $depth);
-}
-
-function valueToString(mixed $value, int $depth): string
+function normalize(mixed $value, int $depth): string
 {
     if (is_null($value)) {
         return 'null';
@@ -121,34 +22,61 @@ function valueToString(mixed $value, int $depth): string
         return $value ? 'true' : 'false';
     }
     if (is_array($value)) {
-        $result = convertArrayToString($value, $depth);
-        $indent = buildIndent($depth);
-        return "{{$result}\n{$indent}}";
+        $result = makeString($value, $depth);
+        $indent = makeIndent($depth);
+        return "{{$result}\n$indent}";
     }
     return "$value";
 }
 
-function convertArrayToString(array $value, int $depth): string
+function iter(array $diff, int $depth = 0): array
 {
-    $keys = array_keys($value);
-    $depthOfDepth = $depth + 1;
+    $indent = makeIndent($depth);
+    $shift = $depth + 1;
+    return array_map(function ($currentValue) use ($indent, $shift) {
+        $key = $currentValue['key'];
+        $type = $currentValue['type'];
+        $value = $currentValue['value'];
 
-    return implode('', array_map(function ($key) use ($value, $depthOfDepth) {
-        $newValue = valueToString($value[$key], $depthOfDepth);
-        $indent = buildIndent($depthOfDepth);
+        switch ($type) {
+            case 'nested':
+                $nested = iter($value, $shift);
+                $normalizeValue = implode("\n", $nested);
+                return "$indent    $key: {\n$normalizeValue\n$indent    }";
+            case 'immutable':
+                $normalizeValue = normalize($value, $shift);
+                return "$indent    $key: $normalizeValue";
+            case 'added':
+                $normalizeValue = normalize($value, $shift);
+                return "$indent  + $key: $normalizeValue";
+            case 'deleted':
+                $normalizeValue = normalize($value, $shift);
+                return "$indent  - $key: $normalizeValue";
+            case 'updated':
+                $normalizeValue = normalize($value, $shift);
+                $normalizeValue2 = normalize($currentValue['value2'], $shift);
+                return "$indent  - $key: $normalizeValue\n$indent  + $key: $normalizeValue2";
+            default:
+                throw new Exception("Unknown type: $type");
+        }
+    }, $diff);
+}
 
-        return "\n$indent$key: $newValue";
-    }, $keys));
+function makeIndent(int $depth): string
+{
+    return str_repeat("    ", $depth);
 }
 
 
-/**
- * @throws \Exception
- */
-function getStylish(array $diffTree): string
+function makeString(array $value, int $depth): string
 {
-    $formattedDiff = formatToStringFromDiffTree($diffTree);
-    $result = implode("\n", $formattedDiff);
+    $keys = array_keys($value);
+    $shift = $depth + 1;
 
-    return "{\n$result\n}";
+    return implode('', array_map(function ($key) use ($value, $shift) {
+        $newValue = normalize($value[$key], $shift);
+        $indent = makeIndent($shift);
+
+        return "\n$indent$key: $newValue";
+    }, $keys));
 }

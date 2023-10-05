@@ -9,7 +9,7 @@ function normalize(mixed $value): string|int|float
             false => "false",
             true => "true",
             null => "null",
-            default => is_numeric($value) ? $value : "'{$value}'",
+            default => is_numeric($value) ? $value : "'$value'",
         };
     }
     return "[complex value]";
