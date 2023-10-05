@@ -13,8 +13,8 @@ function buildTree(array $data1, array $data2): array
 
     return array_map(
         function ($key) use ($data1, $data2) {
-            $value = $data1[$key];
-            $value2 = $data2[$key];
+            $value = $data1[$key] ?? null;
+            $value2 = $data2[$key] ?? null;
             if (is_array($value) && is_array($value2)) {
                 return [
                     'type' => 'nested',
