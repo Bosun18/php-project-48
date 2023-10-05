@@ -36,8 +36,8 @@ function iter(array $diff, int $depth = 0): array
     return array_map(function ($currentValue) use ($indent, $shift) {
         $key = $currentValue['key'];
         $type = $currentValue['type'];
-        $value = $currentValue['value'];
-        $value2 = $currentValue['value2'];
+        $value = $currentValue['value'] ?? null;
+        $value2 = $currentValue['value2'] ?? null;
 
         switch ($type) {
             case 'nested':
