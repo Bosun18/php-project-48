@@ -36,7 +36,7 @@ function iter(array $diff, int $depth = 0): array
     return array_map(function ($currentValue) use ($indent, $shift) {
         $key = $currentValue['key'];
         $type = $currentValue['type'];
-        $value = $currentValue['value'];
+        $value = $currentValue['value'] ?? null;
 
         switch ($type) {
             case 'nested':
@@ -66,7 +66,6 @@ function makeIndent(int $depth): string
 {
     return str_repeat("    ", $depth);
 }
-
 
 function makeString(array $value, int $depth): string
 {

@@ -17,12 +17,12 @@ function normalize(mixed $value): string|int|float
 
 function getPlain(mixed $diff, string $keyName = ''): string
 {
-    $result = array_map(function ($node) use ($keyName) {
-        $type = $node['type'];
-        $key =  $node['key'];
-        $value = $node['value'] ?? null;
-        $value2 = $node['value2'] ?? null;
+    $result = array_map(function ($currentValue) use ($keyName) {
+        $type = $currentValue['type'];
+        $key =  $currentValue['key'];
+        $value = $currentValue['value'] ?? null;
         $newKey = $keyName === '' ? $key : "$keyName.$key";
+
         switch ($type) {
             case 'nested':
                 return getPlain($value, $newKey);
@@ -33,7 +33,7 @@ function getPlain(mixed $diff, string $keyName = ''): string
                 return "Property '$newKey' was removed";
             case 'updated':
                 $normalizeValue1 = normalize($value);
-                $normalizeValue2 = normalize($value2);
+                $normalizeValue2 = normalize($currentValue['value2']);
                 return "Property '$newKey' was updated. From $normalizeValue1 to $normalizeValue2";
             case 'immutable':
                 break;
