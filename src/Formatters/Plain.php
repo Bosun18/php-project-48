@@ -4,23 +4,27 @@ namespace Differ\Formatters\Plain;
 
 function normalize(mixed $value): string|int|float
 {
-    if (!is_array($value)) {
-        return match ($value) {
-            false => "false",
-            true => "true",
-            null => "null",
-            default => is_numeric($value) ? $value : "'$value'",
-        };
+    if (is_bool($value)) {
+        return $value ? 'true' : 'false';
     }
-    return "[complex value]";
+    if (is_null($value)) {
+        return 'null';
+    }
+    if (is_string($value)) {
+        return "'$value'";
+    }
+    if (is_array($value)) {
+        return "[complex value]";
+    }
+    return $value;
 }
 
-function getPlain(mixed $diff, string $keyName = ''): string
+function getPlain(array $diff, string $keyName = ''): string
 {
-    $result = array_map(function ($currentValue) use ($keyName) {
-        $type = $currentValue['type'];
-        $key =  $currentValue['key'];
-        $value = $currentValue['value'] ?? null;
+    $result = array_map(function ($node) use ($keyName) {
+        $type = $node['type'];
+        $key =  $node['key'];
+        $value = $node['value'] ?? null;
         $newKey = $keyName === '' ? $key : "$keyName.$key";
 
         switch ($type) {
@@ -33,7 +37,7 @@ function getPlain(mixed $diff, string $keyName = ''): string
                 return "Property '$newKey' was removed";
             case 'updated':
                 $normalizeValue1 = normalize($value);
-                $normalizeValue2 = normalize($currentValue['value2']);
+                $normalizeValue2 = normalize($node['value2']);
                 return "Property '$newKey' was updated. From $normalizeValue1 to $normalizeValue2";
             case 'immutable':
                 break;

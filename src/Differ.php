@@ -4,7 +4,7 @@ namespace Differ\Differ;
 
 use function Functional\sort;
 use function Differ\Parsers\parse;
-use function Differ\Formatter\getFormatter;
+use function Differ\Formatter\format;
 
 function buildTree(array $data1, array $data2): array
 {
@@ -77,5 +77,5 @@ function genDiff(string $pathToFile1, string $pathToFile2, string $format = 'sty
 
     $diff = buildTree($data1, $data2);
 
-    return getFormatter($diff, $format);
+    return format($diff, $format);
 }

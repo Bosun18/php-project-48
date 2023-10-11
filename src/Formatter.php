@@ -9,7 +9,7 @@ use function Differ\Formatters\Json\getJson;
 /**
  * @throws \Exception
  */
-function getFormatter(mixed $diff, string $format): string
+function format(array $diff, string $format): string
 {
     return match ($format) {
         'stylish' => getStylish($diff),
