@@ -15,16 +15,21 @@ function getStylish(array $diff): string
 
 function normalize(mixed $value, int $depth): string
 {
+    if (is_array($value)) {
+        $result = makeString($value, $depth);
+        $indent = makeIndent($depth);
+        return "{{$result}\n{$indent}}";
+    }
+    return valueToString($value);
+}
+
+function valueToString(mixed $value): string
+{
     if (is_null($value)) {
         return 'null';
     }
     if (is_bool($value)) {
         return $value ? 'true' : 'false';
-    }
-    if (is_array($value)) {
-        $result = makeString($value, $depth);
-        $indent = makeIndent($depth);
-        return "{{$result}\n{$indent}}";
     }
     return "$value";
 }
