@@ -19,14 +19,14 @@
 ### Asciinema gendif file3.yaml file4.yaml
 [![asciicast](https://asciinema.org/a/jm1qc4dSzM1WPRi83J3rQPMdp.svg)](https://asciinema.org/a/jm1qc4dSzM1WPRi83J3rQPMdp)
 ### Asciinema gendif stylish file5.json file6.json
-[![asciicast](https://asciinema.org/a/victe1nc8W5WlUGWEwSBvOSCe.svg)](https://asciinema.org/a/victe1nc8W5WlUGWEwSBvOSCe)
+[![asciicast](https://asciinema.org/a/kSJFhJuRfSggOrAiUZU5kmnel.svg)](https://asciinema.org/a/kSJFhJuRfSggOrAiUZU5kmnel)
 ### Asciinema gendif stylish file7.yaml file8.yaml
-[![asciicast](https://asciinema.org/a/Eyz9IfmrjgJb2IvnlxmNrbbZd.svg)](https://asciinema.org/a/Eyz9IfmrjgJb2IvnlxmNrbbZd)
+[![asciicast](https://asciinema.org/a/8Gm4fNYVUmG6XTRo6e8DCrWGO.svg)](https://asciinema.org/a/8Gm4fNYVUmG6XTRo6e8DCrWGO)
 ### Asciinema gendif plain file5.json file6.json
-[![asciicast](https://asciinema.org/a/3ytD2DRCoGZ3OhUgcNPk9xdpj.svg)](https://asciinema.org/a/3ytD2DRCoGZ3OhUgcNPk9xdpj)
+[![asciicast](https://asciinema.org/a/B0wSDkSYiNTpgxis9U7th1mdr.svg)](https://asciinema.org/a/B0wSDkSYiNTpgxis9U7th1mdr)
 ### Asciinema gendif plain file7.yaml file8.yaml
-[![asciicast](https://asciinema.org/a/QoxrbZxn2pCNPMjQQhlRWZeOZ.svg)](https://asciinema.org/a/QoxrbZxn2pCNPMjQQhlRWZeOZ)
+[![asciicast](https://asciinema.org/a/TzHfHNcPBFPgeGHBO3WYVA1eZ.svg)](https://asciinema.org/a/TzHfHNcPBFPgeGHBO3WYVA1eZ)
 ### Asciinema gendif json file5.json file6.json
-[![asciicast](https://asciinema.org/a/ucKZHHnn1xefFFZX0fUP2Eqek.svg)](https://asciinema.org/a/ucKZHHnn1xefFFZX0fUP2Eqek)
+[![asciicast](https://asciinema.org/a/aeOXRX8eSylQZgTbIeTEO3gsb.svg)](https://asciinema.org/a/aeOXRX8eSylQZgTbIeTEO3gsb)
 ### Asciinema gendif json file7.yaml file8.yaml
-[![asciicast](https://asciinema.org/a/O97xUzRKjz2uUaa9BqN86dkHj.svg)](https://asciinema.org/a/O97xUzRKjz2uUaa9BqN86dkHj)
+[![asciicast](https://asciinema.org/a/pg4oqhc66TkhZCXmcTcpPru4X.svg)](https://asciinema.org/a/pg4oqhc66TkhZCXmcTcpPru4X)
