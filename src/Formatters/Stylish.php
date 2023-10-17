@@ -7,7 +7,7 @@ use Exception;
 /**
  * @throws Exception
  */
-function getStylish(array $diff): string
+function getFormat(array $diff): string
 {
     $result = implode("\n", iter($diff));
     return "{\n$result\n}";
@@ -37,30 +37,30 @@ function valueToString(mixed $value): string
 function iter(array $diff, int $depth = 0): array
 {
     $indent = makeIndent($depth);
-    $shift = $depth + 1;
-    return array_map(function ($node) use ($indent, $shift) {
+    $newDepth = $depth + 1;
+    return array_map(function ($node) use ($indent, $newDepth) {
         $key = $node['key'];
         $type = $node['type'];
         $value = $node['value'] ?? null;
 
         switch ($type) {
             case 'nested':
-                $nested = iter($value, $shift);
-                $normalizeValue = implode("\n", $nested);
-                return "$indent    $key: {\n$normalizeValue\n$indent    }";
+                $nested = iter($value, $newDepth);
+                $normalizedValue = implode("\n", $nested);
+                return "$indent    $key: {\n$normalizedValue\n$indent    }";
             case 'immutable':
-                $normalizeValue = normalize($value, $shift);
-                return "$indent    $key: $normalizeValue";
+                $normalizedValue = normalize($value, $newDepth);
+                return "$indent    $key: $normalizedValue";
             case 'added':
-                $normalizeValue = normalize($value, $shift);
-                return "$indent  + $key: $normalizeValue";
+                $normalizedValue = normalize($value, $newDepth);
+                return "$indent  + $key: $normalizedValue";
             case 'deleted':
-                $normalizeValue = normalize($value, $shift);
-                return "$indent  - $key: $normalizeValue";
+                $normalizedValue = normalize($value, $newDepth);
+                return "$indent  - $key: $normalizedValue";
             case 'updated':
-                $normalizeValue = normalize($value, $shift);
-                $normalizeValue2 = normalize($node['value2'], $shift);
-                return "$indent  - $key: $normalizeValue\n$indent  + $key: $normalizeValue2";
+                $normalizedValue = normalize($value, $newDepth);
+                $normalizedValue2 = normalize($node['value2'], $newDepth);
+                return "$indent  - $key: $normalizedValue\n$indent  + $key: $normalizedValue2";
             default:
                 throw new Exception("Unknown type: $type");
         }
@@ -75,11 +75,11 @@ function makeIndent(int $depth): string
 function makeString(array $value, int $depth): string
 {
     $keys = array_keys($value);
-    $shift = $depth + 1;
+    $newDepth = $depth + 1;
 
-    return implode('', array_map(function ($key) use ($value, $shift) {
-        $newValue = normalize($value[$key], $shift);
-        $indent = makeIndent($shift);
+    return implode('', array_map(function ($key) use ($value, $newDepth) {
+        $newValue = normalize($value[$key], $newDepth);
+        $indent = makeIndent($newDepth);
 
         return "\n$indent$key: $newValue";
     }, $keys));

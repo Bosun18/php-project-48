@@ -2,9 +2,9 @@
 
 namespace Differ\Formatter;
 
-use function Differ\Formatters\Stylish\getStylish;
-use function Differ\Formatters\Plain\getPlain;
-use function Differ\Formatters\Json\getJson;
+use function Differ\Formatters\Stylish\getFormat as getStylish;
+use function Differ\Formatters\Plain\getFormat as getPlain;
+use function Differ\Formatters\Json\getFormat as getJson;
 
 /**
  * @throws \Exception

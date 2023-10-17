@@ -33,6 +33,6 @@ $pathToFile1 = $args['<firstFile>'];
 $pathToFile2 = $args['<secondFile>'];
 $format = $args['--format'];
 
-$differ = genDiff($pathToFile1, $pathToFile2, $format);
+$difference = genDiff($pathToFile1, $pathToFile2, $format);
 
-print_r($differ);
+print_r($difference);

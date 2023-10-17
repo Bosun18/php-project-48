@@ -3,6 +3,7 @@
 namespace Differ\Phpunit\Tests\DiffTest;
 
 use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function Differ\Differ\genDiff;
@@ -13,52 +14,27 @@ class DiffTest extends TestCase
     {
         return __DIR__ . "/fixtures/" . $fixtureName;
     }
-    /**
-     * @throws Exception
-     */
-    public function testStylishGenDiff(): void
-    {
-        $file1 = $this->getFixturePath('file5.json');
-        $file2 = $this->getFixturePath('file6.json');
-        $result = file_get_contents($this->getFixturePath('resultStylish'));
-        $this->assertEquals($result, genDiff($file1, $file2, 'stylish'));
 
-        $file1 = $this->getFixturePath('file7.yaml');
-        $file2 = $this->getFixturePath('file8.yaml');
-        $result = file_get_contents($this->getFixturePath('resultStylish'));
-        $this->assertEquals($result, genDiff($file1, $file2, 'stylish'));
+    public static function additionProvider(): mixed
+    {
+        return [
+            ['file5.json', 'file6.json', 'stylish', 'resultStylish'],
+            ['file7.yaml', 'file8.yaml', 'stylish', 'resultStylish'],
+            ['file5.json', 'file6.json', 'plain', 'resultPlain'],
+            ['file7.yaml', 'file8.yaml', 'plain', 'resultPlain'],
+            ['file5.json', 'file6.json', 'json', 'resultJson'],
+            ['file7.yaml', 'file8.yaml', 'json', 'resultJson'],
+        ];
     }
-
     /**
      * @throws Exception
      */
-    public function testPlainGenDiff(): void
+    #[DataProvider('additionProvider')]
+    public function testGenDiff(string $file1, string $file2, string $format, string $expected): void
     {
-
-        $file1 = $this->getFixturePath('file5.json');
-        $file2 = $this->getFixturePath('file6.json');
-        $result = file_get_contents($this->getFixturePath('resultPlain'));
-        $this->assertEquals($result, genDiff($file1, $file2, 'plain'));
-
-        $file1 = $this->getFixturePath('file7.yaml');
-        $file2 = $this->getFixturePath('file8.yaml');
-        $result = file_get_contents($this->getFixturePath('resultPlain'));
-        $this->assertEquals($result, genDiff($file1, $file2, 'plain'));
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function testJsonGenDiff(): void
-    {
-        $file1 = $this->getFixturePath('file5.json');
-        $file2 = $this->getFixturePath('file6.json');
-        $result = file_get_contents($this->getFixturePath('resultJson'));
-        $this->assertEquals($result, genDiff($file1, $file2, 'json'));
-
-        $file1 = $this->getFixturePath('file7.yaml');
-        $file2 = $this->getFixturePath('file8.yaml');
-        $result = file_get_contents($this->getFixturePath('resultJson'));
-        $this->assertEquals($result, genDiff($file1, $file2, 'json'));
+        $fixture1 = $this->getFixturePath($file1);
+        $fixture2 = $this->getFixturePath($file2);
+        $result = $this->getFixturePath($expected);
+        $this->assertStringEqualsFile($result, genDiff($fixture1, $fixture2, $format));
     }
 }
